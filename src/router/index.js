@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 /* Layout */
-import Layout from '@/layout'
+import Layout from '@/layout2'
 
 /* Router Modules */
 // import componentsRouter from "./modules/components";
@@ -74,19 +74,19 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/home',
-    meta: { title: '管理', icon: 'dashboard' },
+    meta: { title: '菜篮子申报和复审', icon: 'dashboard' },
     children: [
       {
         path: 'home',
         name: 'Home',
         component: () => import('@/views/Home.vue'),
-        meta: { title: '选项1', icon: 'clipboard' }
+        meta: { title: '菜篮子基地申报', icon: 'clipboard' }
       },
       {
         path: 'home2',
         name: 'Home2',
         component: () => import('@/views/Home.vue'),
-        meta: { title: '选项2', icon: 'component' }
+        meta: { title: '个人信息', icon: 'component' }
       },
       {
         path: 'home3',
@@ -107,19 +107,19 @@ export const asyncRoutes = [
     path: '/test',
     component: Layout,
     redirect: '/test/normal',
-    meta: { title: '测试', icon: 'form', roles: ['admin', 'editor'] },
+    meta: { title: '数据报送', icon: 'form', roles: ['admin', 'editor'] },
     children: [
       {
         path: 'normal',
         name: 'Normal',
         component: () => import('@/views/test/test1'),
-        meta: { title: 'normal', icon: 'drag' }
+        meta: { title: '未填报', icon: 'drag' }
       },
       {
         path: 'admin',
         name: 'Admin',
         component: () => import('@/views/test/test2'),
-        meta: { title: 'admin', icon: 'drag', roles: ['admin'] }
+        meta: { title: '已填报', icon: 'drag', roles: ['admin'] }
       },
       {
         path: 'editor',

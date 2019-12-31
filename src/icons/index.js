@@ -1,8 +1,8 @@
-import Vue from "vue";
-import SvgIcon from "@/components/SvgIcon"; // svg component
+import Vue from 'vue'
+import SvgIcon from '@/components/SvgIcon' // svg component
 
 // 全局注册
-Vue.component("svg-icon", SvgIcon);
+Vue.component('svg-icon', SvgIcon)
 
 /**
  * require.context("./test", false, /.test.js$/);
@@ -11,6 +11,6 @@ Vue.component("svg-icon", SvgIcon);
  */
 
 //自动引入 @/src/icons 下面所有的图标
-const req = require.context("./svg", false, /\.svg$/);
-const requireAll = requireContext => requireContext.keys().map(requireContext);
-requireAll(req);
+const req = require.context('./svg', false, /\.svg$/)
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+requireAll(req)

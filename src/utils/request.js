@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
+import store from 'vuex'
 
 // 创建一个 axios 实例
 const service = axios.create({

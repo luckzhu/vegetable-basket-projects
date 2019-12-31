@@ -74,25 +74,25 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/home',
-    meta: { title: '管理', icon: 'all' },
+    meta: { title: '管理', icon: 'dashboard' },
     children: [
       {
         path: 'home',
         name: 'Home',
         component: () => import('@/views/Home.vue'),
-        meta: { title: '选项1', icon: 'add' }
+        meta: { title: '选项1', icon: 'clipboard' }
       },
       {
         path: 'home2',
         name: 'Home2',
         component: () => import('@/views/Home.vue'),
-        meta: { title: '选项2', icon: 'add-cart' }
+        meta: { title: '选项2', icon: 'component' }
       },
       {
         path: 'home3',
         name: 'Home3',
         component: () => import('@/views/Home.vue'),
-        meta: { title: '选项3', icon: 'add-account' }
+        meta: { title: '选项3', icon: 'documentation' }
       }
     ]
   }
@@ -107,25 +107,25 @@ export const asyncRoutes = [
     path: '/test',
     component: Layout,
     redirect: '/test/normal',
-    meta: { title: '测试', icon: 'arrow-right', roles: ['admin', 'editor'] },
+    meta: { title: '测试', icon: 'form', roles: ['admin', 'editor'] },
     children: [
       {
         path: 'normal',
         name: 'Normal',
         component: () => import('@/views/test/test1'),
-        meta: { title: 'normal', icon: 'arrow-up' }
+        meta: { title: 'normal', icon: 'drag' }
       },
       {
         path: 'admin',
         name: 'Admin',
         component: () => import('@/views/test/test2'),
-        meta: { title: 'admin', icon: 'assessed-badge', roles: ['admin'] }
+        meta: { title: 'admin', icon: 'drag', roles: ['admin'] }
       },
       {
         path: 'editor',
         name: 'Editor',
         component: () => import('@/views/test/test3'),
-        meta: { title: 'editor', icon: 'bad', roles: ['editor'] }
+        meta: { title: 'editor', icon: 'drag', roles: ['editor'] }
       }
     ]
   },
@@ -135,19 +135,16 @@ export const asyncRoutes = [
 
 const createRouter = () =>
   new Router({
-    // mode: 'history', // require service support
+    // mode: 'history', // history模式需要服务端支持
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   })
 
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
-  console.log(router)
   const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
-  console.log(router)
+  router.matcher = newRouter.matcher // 当前用户退出后重置路由
 }
 
 export default router

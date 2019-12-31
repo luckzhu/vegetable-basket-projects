@@ -4,7 +4,7 @@ import store from 'vuex'
 
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: '', // url = baseURL + requestURL
+  baseURL: 'http://rap2api.taobao.org/app/mock/241390/', // url = baseURL + requestURL
   withCredentials: true, // 在跨域请求时发送cookies
   timeout: 5000 // 请求超时
 })

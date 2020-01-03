@@ -11,7 +11,12 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item
+          v-for="route in currentRoutes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -24,8 +29,14 @@ import variables from '@/styles/variables.scss'
 
 export default {
   components: { SidebarItem },
+  data() {
+    return {
+      currentRoutes: []
+    }
+  },
   computed: {
     ...mapGetters(['permission_routes', 'sidebar']),
+
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -40,6 +51,18 @@ export default {
     },
     isCollapse() {
       return !this.sidebar.opened
+    }
+  },
+  watch: {
+    //检测路由变化切换侧边栏内容
+    '$route.matched': {
+      handler(matched) {
+        if (matched.length > 0) {
+          const _routes = this.permission_routes.filter(route => route.path === matched[0].path)
+          this.currentRoutes = _routes.length > 0 ? _routes[0].children : []
+        }
+      },
+      immediate: true
     }
   }
 }

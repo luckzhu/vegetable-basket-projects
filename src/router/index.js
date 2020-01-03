@@ -7,7 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout2'
 
 /* Router Modules */
-// import componentsRouter from "./modules/components";
+import adminRouter from './modules/admin'
 // import chartsRouter from "./modules/charts";
 // import tableRouter from "./modules/table";
 // import nestedRouter from "./modules/nested";
@@ -70,32 +70,7 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/home',
-    meta: { title: '菜篮子申报和复审', icon: 'dashboard' },
-    children: [
-      {
-        path: 'home',
-        name: 'Home',
-        component: () => import('@/views/Home.vue'),
-        meta: { title: '菜篮子基地申报', icon: 'clipboard' }
-      },
-      {
-        path: 'home2',
-        name: 'Home2',
-        component: () => import('@/views/Home.vue'),
-        meta: { title: '个人信息', icon: 'component' }
-      },
-      {
-        path: 'home3',
-        name: 'Home3',
-        component: () => import('@/views/Home.vue'),
-        meta: { title: '选项3', icon: 'documentation' }
-      }
-    ]
-  }
+  
 ]
 
 /**
@@ -103,6 +78,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  ...adminRouter,
   {
     path: '/test',
     component: Layout,

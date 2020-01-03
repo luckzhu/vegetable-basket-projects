@@ -3,6 +3,9 @@
     <div class="left-info">
       <p class="title">农业数据统一平台</p>
     </div>
+    <el-menu class="el-menu-demo" mode="horizontal" router>
+      <el-menu-item v-for="item in headerMenu" :key="item.path" :index="resolvePath(item.path)">{{ item.meta.title }}</el-menu-item>
+    </el-menu>
     <div class="right-menu">
       <span style="display:block;" @click="logout">退出登录</span>
     </div>
@@ -11,15 +14,37 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import path from 'path'
 
 export default {
+  data() {
+    return {
+      headerMenu: []
+    }
+  },
   computed: {
-    ...mapGetters(['sidebar'])
+    ...mapGetters(['sidebar', 'permission_routes'])
+  },
+  mounted() {
+    this.filterHeaderMenu(this.permission_routes)
   },
   methods: {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    filterHeaderMenu(routes) {
+      routes.forEach(route => {
+        if (route.headerMenu && !this.headerMenu.includes(route)) {
+          this.headerMenu.push(route)
+        }
+        if (route.children) {
+          this.filterHeaderMenu(route.children)
+        }
+      })
+    },
+    resolvePath(routePath) {
+      return path.resolve('/', routePath)
     }
   }
 }

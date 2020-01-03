@@ -57,9 +57,18 @@ export default {
     //检测路由变化切换侧边栏内容
     '$route.matched': {
       handler(matched) {
+        let matchedPath
         if (matched.length > 0) {
-          const _routes = this.permission_routes.filter(route => route.path === matched[0].path)
+          if (matched[0].path !== '') {
+            matchedPath = matched[0].path
+          } else {
+            matchedPath = matched[1].path
+          }
+          console.log({matchedPath})
+          const _routes = this.permission_routes.filter(route => route.path === matchedPath)
           this.currentRoutes = _routes.length > 0 ? _routes[0].children : []
+          console.log( this.currentRoutes)
+          console.log(matched)
         }
       },
       immediate: true

@@ -79,32 +79,6 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   ...adminRouter,
-  {
-    path: '/test',
-    component: Layout,
-    redirect: '/test/normal',
-    meta: { title: '数据报送', icon: 'form', roles: ['admin', 'editor'] },
-    children: [
-      {
-        path: 'normal',
-        name: 'Normal',
-        component: () => import('@/views/test/test1'),
-        meta: { title: '未填报', icon: 'drag' }
-      },
-      {
-        path: 'admin',
-        name: 'Admin',
-        component: () => import('@/views/test/test2'),
-        meta: { title: '已填报', icon: 'drag', roles: ['admin'] }
-      },
-      {
-        path: 'editor',
-        name: 'Editor',
-        component: () => import('@/views/test/test3'),
-        meta: { title: 'editor', icon: 'drag', roles: ['editor'] }
-      }
-    ]
-  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

@@ -2,6 +2,21 @@ import Layout from '@/layout2'
 
 const adminRouter = [
   {
+    path: '/home',
+    component: Layout,
+    redirect: '/info',
+    headerMenu: true,
+    meta: { title: '首页', icon: 'form' },
+    children: [
+      {
+        path: '/info',
+        name: 'Normal',
+        component: () => import('@/views/test/test1'),
+        meta: { title: '个人信息', icon: 'drag' }
+      },
+    ]
+  },
+  {
     path: '/storage',
     component: Layout,
     redirect: '/storage/test1',
